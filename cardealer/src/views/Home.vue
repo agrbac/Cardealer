@@ -21,19 +21,19 @@
             <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Search</a>
+            <a class="nav-link" href="/search">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sell Car</a>
+            <a class="nav-link" href="/sell car">Sell Car</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My listings</a>
+            <a class="nav-link" href="/my listings">My listings</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="/logout">Logout</a>
           </li>
         </ul>
       </div>
