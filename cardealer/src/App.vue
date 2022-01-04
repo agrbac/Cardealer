@@ -1,14 +1,60 @@
 <template>
- <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Sign Up</router-link>|
-      <router-link to="/search">Search</router-link> |
-      <router-link to="/sell car">Sell car</router-link> |
-      <router-link to="/my listings">My listings</router-link> |
-      <router-link to="/logout">Logout</router-link> |
-    </div>
+  <div id="app">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="@/assets/cardealer.jpg"
+            alt=""
+            width="160"
+            height="60"
+            class="d-inline-block align-text-top"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/login" class="nav-link">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/signup" class="nav-link">Sign Up</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/search" class="nav-link">Search</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/sell car" class="nav-link"
+                >Sell car</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/my listings" class="nav-link"
+                >My listings</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link to="/logout" class="nav-link">Logout</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <router-view />
   </div>
 </template>
@@ -33,5 +79,9 @@
       color: #42b983;
     }
   }
+}
+.bg-light {
+  --bs-bg-opacity: 1;
+  background-color: #e1e3e6 !important;
 }
 </style>
