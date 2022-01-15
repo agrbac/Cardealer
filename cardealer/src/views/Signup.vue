@@ -8,7 +8,7 @@
           <form>
             <div class="form-group">
               <label for="exampleInputUsername">Username</label>
-              <input
+              <input required
                 type="username"
                 v-model="username"
                 class="form-control"
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input
+              <input required
                 type="email"
                 v-model="email"
                 class="form-control"
@@ -30,7 +30,7 @@ email"
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input
+              <input required
                 type="password"
                 v-model="password"
                 class="form-control"
@@ -43,7 +43,7 @@ email"
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Repeat password</label>
-              <input
+              <input required
                 type="password"
                 v-model="passwordRepeat"
                 class="form-control"
@@ -74,27 +74,27 @@ export default {
     };
   },
   methods: {
-    signup() {
-      if (this.password != this.passwordRepeat) {
-        alert("Confirm password not match");
-        return;
-
-        if ((this.username, this.email == null)) {
+    signup() {  
+      console.log(this.$router);
+      let that = this; 
+       if ((this.username == null, this.email == null) && (this.password != this.passwordRepeat)) {
           alert("cant be blank");
           return;
         }
-      } else {
+        else {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(function () {
+          .then( (result) => {
             console.log("uspjesna registracija");
+            this.$router.replace ({name: "Home"});
           })
           .catch(function (error) {
             console.error("greska", error);
           });
         console.log("nastavak");
         alert("uspjesna registracija");
+        return true;
       }
     },
   },
