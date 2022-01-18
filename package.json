@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "firebase": "^9.6.2"
+    "firebase": "^9.6.3",
+    "vue-upload-drop-images": "^1.0.7"
   }
 }

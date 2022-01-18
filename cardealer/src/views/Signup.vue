@@ -8,7 +8,8 @@
           <form>
             <div class="form-group">
               <label for="exampleInputUsername">Username</label>
-              <input required
+              <input
+                required
                 type="username"
                 v-model="username"
                 class="form-control"
@@ -18,7 +19,8 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input required
+              <input
+                required
                 type="email"
                 v-model="email"
                 class="form-control"
@@ -30,7 +32,8 @@ email"
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input required
+              <input
+                required
                 type="password"
                 v-model="password"
                 class="form-control"
@@ -43,7 +46,8 @@ email"
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Repeat password</label>
-              <input required
+              <input
+                required
                 type="password"
                 v-model="passwordRepeat"
                 class="form-control"
@@ -74,20 +78,22 @@ export default {
     };
   },
   methods: {
-    signup() {  
+    signup() {
       console.log(this.$router);
-      let that = this; 
-       if ((this.username == null, this.email == null) && (this.password != this.passwordRepeat)) {
-          alert("cant be blank");
-          return;
-        }
-        else {
+      let that = this;
+      if (
+        (this.username == null, this.email == null) &&
+        this.password != this.passwordRepeat
+      ) {
+        alert("cant be blank");
+        return;
+      } else {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then( (result) => {
+          .then((result) => {
             console.log("uspjesna registracija");
-            this.$router.replace ({name: "Home"});
+            this.$router.replace({ name: "Home" });
           })
           .catch(function (error) {
             console.error("greska", error);
