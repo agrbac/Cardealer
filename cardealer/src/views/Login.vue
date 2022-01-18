@@ -24,14 +24,16 @@ email"
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input
-              v-model="password"
+                v-model="password"
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password"
               />
             </div>
-            <button type="button" @click="login()" class="btn btn-primary">Submit</button>
+            <button type="button" @click="login()" class="btn btn-primary">
+              Submit
+            </button>
           </form>
         </div>
         <div class="col-sm"></div>
@@ -42,32 +44,31 @@ email"
 
 <script>
 import firebase from "@/firebase";
-    export default{
-      name: "login",
-      data() {
-        return {
-          username:"",
-          password:"",
-        }
-      },
-      methods: {
-        login() {
-          console.log("login..." + this.username);
-          console.log(this.$router);
-          let that = this;
-          firebase
-          .auth()
-          .signInWithEmailAndPassword(this.username, this.password)
-          .then ((result) =>{
-            console.log("uspjesna prijava", result);
-            this.$router.replace ({name: "Home"});
-          })
-          .catch(function(e){
-            console.error("greska", e);
-          }
-          );
-        }
-      }
-}
+export default {
+  name: "login",
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      console.log("login..." + this.username);
+      console.log(this.$router);
+      let that = this;
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.username, this.password)
+        .then((result) => {
+          console.log("uspjesna prijava", result);
+          this.$router.replace({ name: "Home" });
+        })
+        .catch(function (e) {
+          console.error("greska", e);
+        });
+    },
+  },
+};
 </script>
 
