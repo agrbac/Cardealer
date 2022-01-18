@@ -1,52 +1,78 @@
 <template>
   <div class="row">
-    <div class="col-3">
-    </div>
+    <div class="col-3"></div>
     <div class="col-6">
-        <p></p>
-        <input  v-model="store.searchTerm" class="form-control" type="text" placeholder="Search" aria-label="Search">
-        <p></p>
-        {{store.searchTerm}}
-        <p></p>
-        <searchCard v-for="card in cards" :key="card" :info="card"/>
-
-</div>
+      <p></p>
+      <form>
+        <input
+          v-model="store.searchTerm"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+      </form>
+      <p></p>
+      <p></p>
+      <searchCard v-for="card in filteredCards" :key="card.url" :info="card" />
+    </div>
   </div>
 </template>
-<script> 
+<script>
 import store from "@/store";
-import searchCard from '@/components/searchCard.vue';
-let cards=[]
-cards=[{url:"https://i.insider.com/592f4169b74af41b008b5977?width=700",description:"Audi"}, 
-{url:"https://elitetraveler.com/wp-content/uploads/2019/07/Screenshot-2020-05-12-at-15.10.34.png",description:"BMW"}, 
-{url:"https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5d35eacaf1176b0008974b54%2F2020-Chevrolet-Corvette-Stingray%2F960x0.jpg%3FcropX1%3D790%26cropX2%3D5350%26cropY1%3D784%26cropY2%3D3349",description:"Golf"},
+import searchCard from "@/components/searchCard.vue";
+let cards = [];
+cards = [
+  {
+    url: "https://www.motortrend.com/uploads/sites/5/2020/12/2021-Audi-R8-Panther-Edition-24.jpg?fit=around%7C875:492.1875",
+    description: "Audi R8",
+  },
+  {
+    url: "https://cdn.audi.hr/media/GalleryThumbnails_Slider_Image_Component/67267-680528-slider-417955/dh-1459-a9ad28/a31ce513/1627904235/1920x1080-audi-rs-5-coupe-my2021-1513-oe.jpg",
+    description: "Audi RS 5",
+  },
+  {
+    url: "https://carsalesbase.com/wp-content/uploads/2019/03/BMW_3_series-auto-sales-statistics-Europe.jpg",
+    description: "BMW 3",
+  },
+  {
+    url: "https://www.tuningblog.eu/wp-content/uploads/2019/09/BB-VW-Golf-VII-GTI-TCR-Tuning-2019-3.jpg",
+    description: "VW Golf 7 GTI",
+  },
+  {
+    url: "https://cdn.motor1.com/images/mgl/BMzwe/s1/2020-vw-golf-8-by-jms.jpg",
+    description: "VW Golf 8",
+  },
+  {
+    url: "https://storage.glasistre.hr/MediaServer/Photos/Download/185208?Format=1",
+    description: "BMW 5",
+  },
 ];
 
 export default {
-    name:"Search",
-    components: {
-        searchCard,
-        
-    },
-     data:function() {
-     return { 
-     store,
-     cards,
-  }
+  name: "Search",
+  data: function () {
+    return {
+      cards,
+      store,
+    };
   },
   computed: {
-      filteredCards() {
-          let termin=this.store.searchTerm;
-          let newCards=[]
-          for (let card of this.cards) {
-             if (card.description.indexOf(termin) >=0) {
-                 newCards.push(card)
-             }
-             console.log(newCards);
-          }
-          return newCards;
-      },
-  }
+    filteredCards() {
+      let termin = this.store.searchTerm;
+      let newCards = [];
+      for (let card of this.cards) {
+        if (card.description.indexOf(termin) >= 0) {
+          newCards.push(card);
+        }
+        console.log(newCards);
+      }
+      return newCards;
+    },
+  },
+  components: {
+    searchCard,
+  },
 };
 </script>
 
