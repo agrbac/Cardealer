@@ -146,6 +146,7 @@ export default {
   components: {
     UploadImages,
   },
+
   methods: {
     addListing() {
       const model = this.model;
@@ -157,21 +158,48 @@ export default {
       const Region = this.Region;
       const Contactnumber = this.Contactnumber;
       const Image = this.Image;
+      if (
+        (this.model == 0,
+        this.Manufacturer == 0,
+        this.Fuel == 0,
+        this.Enginesize == 0,
+        this.Year == 0,
+        this.Kilometrage == 0,
+        this.Region == 0,
+        this.Contactnumber == 0)
+      ) {
+        alert("Please fill in all the blank spaces");
+        return;
+      } else {
+        db.collection("listings")
+          .add({
+            model1: model,
+            Manufacturer1: Manufacturer,
+            Fuel1: Fuel,
+            Enginesize1: Enginesize,
+            Year1: Year,
+            Kilometrage1: Kilometrage,
+            Region1: Region,
+            Contactnumber1: Contactnumber,
+            Image1: Image,
+            email: store.currentUser,
+            posted_at: Date.now(),
+          })
 
-      db.collection("listings").add({
-        model1: model,
-        Manufacturer1: Manufacturer,
-        Fuel1: Fuel,
-        Enginesize1: Enginesize,
-        Year1: Year,
-        Kilometrage1: Kilometrage,
-        Region1: Region,
-        Contactnumber1: Contactnumber,
-        Imag1e: Image,
-        email: store.currentUser,
-        posted_at: Date.now(),
-      });
-      console.log("ok");
+          .then((doc) => {
+            alert("Succesfully added");
+
+            this.model = "";
+            this.Manufacturer = "";
+            this.Fuel = "";
+            this.Enginesize = "";
+            this.Year = "";
+            this.Kilometrage = "";
+            this.Region = "";
+            this.Contactnumber = "";
+            this.Image = "";
+          });
+      }
     },
   },
 };

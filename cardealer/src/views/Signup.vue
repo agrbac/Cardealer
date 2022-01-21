@@ -67,12 +67,13 @@ email"
 </template>
   
   <script>
-import firebase from "@/firebase";
+import { firebase } from "@/firebase";
 export default {
   name: "signup",
   data() {
     return {
       username: "",
+      email: "",
       password: "",
       passwordRepeat: "",
     };
@@ -82,11 +83,14 @@ export default {
       console.log(this.$router);
       let that = this;
       if (
-        (this.username == null, this.email == null) &&
-        this.password != this.passwordRepeat
+        this.username == 0 ||
+        this.email == 0 ||
+        this.password == 0 ||
+        this.passwordRepeat == 0
       ) {
-        alert("cant be blank");
-        return;
+        alert("Please fill in all the blank spaces");
+      } else if (this.password != this.passwordRepeat) {
+        alert("password not match");
       } else {
         firebase
           .auth()

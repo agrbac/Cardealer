@@ -49,7 +49,7 @@
 </template>
 <script>
 import store from "@/store";
-import firebase from "@/firebase";
+import { firebase } from "@/firebase";
 import router from "@/router";
 
 firebase.auth().onAuthStateChanged(function (user) {
