@@ -98,13 +98,14 @@ export default {
           .then((result) => {
             console.log("uspjesna registracija");
             this.$router.replace({ name: "Home" });
+            alert("uspjesna registracija");
+            return true;
           })
           .catch(function (error) {
             console.error("greska", error);
+            alert(error);
+            return;
           });
-        console.log("nastavak");
-        alert("uspjesna registracija");
-        return true;
       }
     },
   },
