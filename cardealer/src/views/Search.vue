@@ -59,10 +59,10 @@ export default {
   },
   computed: {
     filteredCards() {
-      let termin = this.store.searchTerm;
+      let termin = this.store.searchTerm.toLowerCase();
       let newCards = [];
       for (let card of this.cards) {
-        if (card.description.indexOf(termin) >= 0) {
+        if (card.description.toLowerCase().indexOf(termin) >= 0) {
           newCards.push(card);
         }
         console.log(newCards);
@@ -75,4 +75,3 @@ export default {
   },
 };
 </script>
-
