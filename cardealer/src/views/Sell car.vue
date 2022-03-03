@@ -104,13 +104,16 @@
             </div>
             <div>
               <label for="exampleImage1">Image</label>
-              <UploadImages
-                v-model="Image"
-                max="1"
-                maxError="Max files exceed"
-                uploadMsg="upload product images"
-                fileError="images files only accepted"
-              />
+              <div id="croppa">
+                <croppa
+                  :width="325"
+                  :height="350"
+                  accept="image/*"
+                  placeholder="Upload Image..."
+                  v-model="imageReference"
+                >
+                </croppa>
+              </div>
             </div>
             <p></p>
             <button type="button" @click="addListing()" class="btn btn-primary">
@@ -126,8 +129,12 @@
 <script>
 import UploadImages from "vue-upload-drop-images";
 import store from "@/store";
-import { db } from "@/firebase";
+import { db, storage } from "@/firebase";
+import Vue from "vue";
+import Croppa from "vue-croppa";
+import "vue-croppa/dist/vue-croppa.css";
 
+Vue.use(Croppa);
 export default {
   name: "sellcar",
   data: function () {
@@ -140,7 +147,7 @@ export default {
       Kilometrage: "",
       Region: "",
       Contactnumber: "",
-      Image: "",
+      imageReference: "",
     };
   },
   components: {
@@ -157,7 +164,7 @@ export default {
       const Kilometrage = this.Kilometrage;
       const Region = this.Region;
       const Contactnumber = this.Contactnumber;
-      const Image = this.Image;
+      const Image = this.imageReference;
       if (
         (this.model == 0,
         this.Manufacturer == 0,
@@ -171,35 +178,51 @@ export default {
         alert("Please fill in all the blank spaces");
         return;
       } else {
-        db.collection("listings")
-          .add({
-            model1: model,
-            Manufacturer1: Manufacturer,
-            Fuel1: Fuel,
-            Enginesize1: Enginesize,
-            Year1: Year,
-            Kilometrage1: Kilometrage,
-            Region1: Region,
-            Contactnumber1: Contactnumber,
-            Image1: Image,
-            email: store.currentUser,
-            posted_at: Date.now(),
-          })
+        this.imageReference.generateBlob((blobData) => {
+          console.log(blobData);
+          let imageName = store.currentUser + "/" + Date.now() + ".png";
+          storage
+            .ref(imageName)
+            .put(blobData)
+            .then((result) => {
+              //uspješno spremanje
+              result.ref.getDownloadURL().then((url) => {
+                console.log("Link", url);
 
-          .then((doc) => {
-            alert("Succesfully added");
+                db.collection("listings")
+                  .add({
+                    model1: model,
+                    Manufacturer1: Manufacturer,
+                    Fuel1: Fuel,
+                    Enginesize1: Enginesize,
+                    Year1: Year,
+                    Kilometrage1: Kilometrage,
+                    Region1: Region,
+                    Contactnumber1: Contactnumber,
+                    Image1: url,
+                    email: store.currentUser,
+                    posted_at: Date.now(),
+                  })
 
-            this.model = "";
-            this.Manufacturer = "";
-            this.Fuel = "";
-            this.Enginesize = "";
-            this.Year = "";
-            this.Kilometrage = "";
-            this.Region = "";
-            this.Contactnumber = "";
-            this.Image = "";
-          });
-      }
+                  .then((doc) => {
+                    alert("Succesfully added");
+
+                    this.model = "";
+                    this.Manufacturer = "";
+                    this.Fuel = "";
+                    this.Enginesize = "";
+                    this.Year = "";
+                    this.Kilometrage = "";
+                    this.Region = "";
+                    this.Contactnumber = "";
+                    this.Image = "";
+                  });
+              });
+            });
+        });
+
+        // ovdje treba zavrsit img funkcija
+      } // ovdje else svršava
     },
   },
 };
