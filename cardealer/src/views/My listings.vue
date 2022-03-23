@@ -1,19 +1,18 @@
-
 <template>
   <div class="container">
     <h3 class="p-3 text-center">Your listings</h3>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-dark">
       <thead>
         <tr>
-          <th>Model</th>
-          <th>Manufacturer</th>
-          <th>Fuel</th>
-          <th>Engine size</th>
-          <th>Year</th>
-          <th>Kilometrage</th>
-          <th>Region</th>
-          <th>Contact number</th>
-          <th>Image</th>
+          <th scope="col">Model</th>
+          <th scope="col">Manufacturer</th>
+          <th scope="col">Fuel</th>
+          <th scope="col">Engine size</th>
+          <th scope="col">Year</th>
+          <th scope="col">Kilometrage</th>
+          <th scope="col">Region</th>
+          <th scope="col">Contact number</th>
+          <th scope="col">Image</th>
         </tr>
       </thead>
       <tbody>
