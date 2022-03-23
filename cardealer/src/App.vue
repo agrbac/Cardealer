@@ -91,7 +91,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
 #nav {
@@ -99,15 +99,15 @@ export default {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ff0000;
     }
   }
 }
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: #e1e3e6 !important;
+  background-color: rgb(50, 50, 50) !important;
 }
 </style>

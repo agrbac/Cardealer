@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <p></p>
     <h1>Sell car</h1>
     <div class="container">
       <div class="row">
@@ -227,3 +228,8 @@ export default {
   },
 };
 </script>
+<style>
+.col-sm {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+</style>
