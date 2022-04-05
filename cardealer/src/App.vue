@@ -4,15 +4,25 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img
-            src="@/assets/cardealer.jpg"
+            src="@/assets/cardealer.svg"
             alt=""
             width="160"
             height="60"
             class="d-inline-block align-text-top"
           />
         </a>
-
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav">
             <li v-if="store.currentUser" class="nav-item">
               <router-link to="/" class="nav-link">Home</router-link>
@@ -92,6 +102,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
+  background: #b6b6b6;
 }
 
 #nav {
@@ -109,5 +120,29 @@ export default {
 .bg-light {
   --bs-bg-opacity: 1;
   background-color: rgb(50, 50, 50) !important;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
 }
 </style>

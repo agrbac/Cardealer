@@ -13,6 +13,7 @@
           <th scope="col">Region</th>
           <th scope="col">Contact number</th>
           <th scope="col">Image</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
           <td>{{ user.region1 }}</td>
           <td>{{ user.contactnumber1 }}</td>
           <td><img :src="user.image1" height="200" /></td>
+          <td><i class="bi bi-trash3-fill" @click="removeCar(user)"></i></td>
         </tr>
       </tbody>
     </table>
@@ -45,7 +47,7 @@ export default {
     this.getPosts();
   },
 
-  name: "sellcar",
+  name: "MyListings",
   data() {
     return {
       users: [],
@@ -70,6 +72,7 @@ export default {
             console.log("testpodataka", data);
 
             let auto = {
+              id: doc.id,
               model1: data.model1,
               manufacturer1: data.Manufacturer1,
               fuel1: data.Fuel1,
@@ -84,6 +87,39 @@ export default {
           });
         });
     },
+
+    removeCar(user) {
+      var delitepost = db.collection("listings");
+      delitepost
+        .doc(user.id)
+        .delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+          (this.users = []), this.getPosts();
+        })
+        .catch((error) => {
+          console.error("Error removing document: ", error);
+        });
+    },
   },
 };
 </script>
+
+<style>
+.container {
+  min-height: calc(100vh - 133.2px);
+}
+
+table td {
+  vertical-align: middle;
+}
+
+.bi-trash3-fill {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.bi-trash3-fill:hover {
+  color: red;
+}
+</style>

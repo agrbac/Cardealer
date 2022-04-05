@@ -1,7 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm"></div>
+      <div class="col-sm"></div>
+
       <p></p>
       <p></p>
       <form>
@@ -15,6 +18,7 @@
       </form>
       <p></p>
       <p></p>
+
       <searchCard v-for="card in filteredCards" :key="card.id" :info="card" />
     </div>
   </div>
@@ -58,6 +62,8 @@ export default {
               region1: data.Region1,
               contactnumber1: data.Contactnumber1,
               image1: data.Image1,
+              email: data.email,
+              posted_at: data.posted_at,
             };
             this.cards.push(auto);
           });
