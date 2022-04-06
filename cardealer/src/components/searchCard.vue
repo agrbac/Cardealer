@@ -31,8 +31,6 @@
         <p>Contact number: {{ info.contactnumber1 }}</p>
         <p>e-mail: {{ info.email }}</p>
         <p>Posted {{ postedFromNow }}</p>
-        <p>asdfasdfsdaf</p>
-        <p>sdfsdfsdf</p>
       </div>
     </div>
   </div>

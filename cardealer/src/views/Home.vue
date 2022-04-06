@@ -1,12 +1,12 @@
-  <template>
+<template>
   <div class="title">
     Welcome to CarDealer
-   <div> Your best dealer in the country</div>
+    <div>Your best dealer in the country</div>
   </div>
 </template>
 
 <style scoped>
-.title{
+.title {
   font-size: 5rem;
   text-align: center;
   padding: 20rem;
