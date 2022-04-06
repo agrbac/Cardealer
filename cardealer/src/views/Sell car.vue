@@ -91,6 +91,19 @@
 
               <p></p>
             </div>
+
+            <div class="form-group">
+              <label for="examplePrice1">Price</label>
+              <input
+                type="number"
+                v-model="Price"
+                class="form-control"
+                id="exampleInputPrice1"
+                placeholder="Enter Price(Kn)"
+              />
+              <p></p>
+            </div>
+
             <div class="form-group">
               <label for="exampleContact number1">Contact number</label>
               <input
@@ -148,6 +161,7 @@ export default {
       Kilometrage: "",
       Region: "",
       Contactnumber: "",
+      Price: "",
       imageReference: "",
     };
   },
@@ -164,6 +178,7 @@ export default {
       const Year = this.Year;
       const Kilometrage = this.Kilometrage;
       const Region = this.Region;
+      const Price = this.Price;
       const Contactnumber = this.Contactnumber;
       const Image = this.imageReference;
       if (
@@ -174,6 +189,7 @@ export default {
         this.Year == 0,
         this.Kilometrage == 0,
         this.Region == 0,
+        this.Price == 0,
         this.Contactnumber == 0)
       ) {
         alert("Please fill in all the blank spaces");
@@ -199,6 +215,7 @@ export default {
                     Year1: Year,
                     Kilometrage1: Kilometrage,
                     Region1: Region,
+                    Price1: Price,
                     Contactnumber1: Contactnumber,
                     Image1: url,
                     email: store.currentUser,
@@ -215,6 +232,7 @@ export default {
                     this.Year = "";
                     this.Kilometrage = "";
                     this.Region = "";
+                    this.Price = "";
                     this.Contactnumber = "";
                     this.Image = "";
                   });

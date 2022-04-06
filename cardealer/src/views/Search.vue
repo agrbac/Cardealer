@@ -60,6 +60,7 @@ export default {
               year1: data.Year1,
               kilometrage1: data.Kilometrage1,
               region1: data.Region1,
+              price1: data.Price1,
               contactnumber1: data.Contactnumber1,
               image1: data.Image1,
               email: data.email,

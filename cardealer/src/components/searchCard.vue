@@ -21,7 +21,7 @@
           "
         >
           <h2>{{ info.manufacturer1 }} {{ info.model1 }}</h2>
-          <i class="bi bi-star"></i>
+          <i class="bi bi-star-fill"></i>
         </div>
         <br />
         <p>Engine: {{ info.enginesize1 }}, {{ info.fuel1 }}</p>
@@ -30,6 +30,10 @@
         <p>Vehicle location: {{ info.region1 }}</p>
         <p>Contact number: {{ info.contactnumber1 }}</p>
         <p>e-mail: {{ info.email }}</p>
+        <p>
+          Price: <strong>{{ info.price1 }}Kn</strong> ~
+          <strong>{{ (info.price1 / 7.5).toFixed(2) }}€</strong>
+        </p>
         <p>Posted {{ postedFromNow }}</p>
       </div>
     </div>
@@ -94,5 +98,14 @@ body {
   background-color: rgb(64, 64, 64);
   color: white;
   transform: rotateY(180deg);
+}
+
+.bi-star-fill {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.bi-star-fill:hover {
+  color: rgb(255, 251, 0);
 }
 </style>

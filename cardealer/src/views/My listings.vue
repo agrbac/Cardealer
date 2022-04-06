@@ -11,6 +11,7 @@
           <th scope="col">Year</th>
           <th scope="col">Kilometrage</th>
           <th scope="col">Region</th>
+          <th scope="col">Price</th>
           <th scope="col">Contact number</th>
           <th scope="col">Image</th>
           <th></th>
@@ -25,6 +26,7 @@
           <td>{{ user.year1 }}</td>
           <td>{{ user.kilometrage1 }}</td>
           <td>{{ user.region1 }}</td>
+          <td>{{ user.price1 }}Kn</td>
           <td>{{ user.contactnumber1 }}</td>
           <td><img :src="user.image1" height="200" /></td>
           <td><i class="bi bi-trash3-fill" @click="removeCar(user)"></i></td>
@@ -80,6 +82,7 @@ export default {
               year1: data.Year1,
               kilometrage1: data.Kilometrage1,
               region1: data.Region1,
+              price1: data.Price1,
               contactnumber1: data.Contactnumber1,
               image1: data.Image1,
             };
