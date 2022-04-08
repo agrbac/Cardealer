@@ -21,7 +21,9 @@
           "
         >
           <h2>{{ info.manufacturer1 }} {{ info.model1 }}</h2>
-          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star" v-if="save" @click="addToFavorites()"></i>
+          <i class="bi bi-star-fill" v-if="remove" @click="removeFromFav()">
+          </i>
         </div>
         <br />
         <p>Engine: {{ info.enginesize1 }}, {{ info.fuel1 }}</p>
@@ -29,7 +31,7 @@
         <p>Mileage: {{ info.kilometrage1 }}</p>
         <p>Vehicle location: {{ info.region1 }}</p>
         <p>Contact number: {{ info.contactnumber1 }}</p>
-        <p>e-mail: {{ info.email }}</p>
+
         <p>
           Price: <strong>{{ info.price1 }}Kn</strong> ~
           <strong>{{ (info.price1 / 7.5).toFixed(2) }}€</strong>
@@ -42,13 +44,91 @@
 
 <script>
 import moment from "moment";
+import { db } from "@/firebase";
+import store from "@/store";
 
 export default {
   props: ["info"],
   name: "searchCard",
+  data() {
+    return {
+      save: false,
+      remove: false,
+      delitingId: "",
+    };
+  },
   computed: {
     postedFromNow() {
       return moment(this.info.posted_at).fromNow();
+    },
+  },
+
+  mounted() {
+    this.favbutton();
+  },
+
+  methods: {
+    favbutton() {
+      var checkpost = db.collection("Favoriteposts");
+      checkpost
+        .where("userId", "==", store.currentUser.id)
+        .where("id", "==", this.info.id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            this.save = true;
+            console.log("This add is not on your favorite list.");
+          }
+          querySnapshot.forEach((doc) => {
+            console.log(doc.id, "=>", doc.data());
+            this.remove = true;
+            this.delitingId = doc.id;
+          });
+        });
+    },
+
+    addToFavorites() {
+      db.collection("Favoriteposts")
+        .add({
+          userId: store.currentUser.id,
+          id: this.info.id,
+          model: this.info.model1,
+          Manufacturer: this.info.manufacturer1,
+          Fuel: this.info.fuel1,
+          Enginesize: this.info.enginesize1,
+          Year: this.info.year1,
+          Kilometrage: this.info.kilometrage1,
+          Region: this.info.region1,
+          Price: this.info.price1,
+          Contactnumber: this.info.contactnumber1,
+          Image: this.info.image1,
+          email: store.currentUser,
+          posted_at: this.info.posted_at,
+        })
+        .then((doc) => {
+          console.log("Spremljeno", doc.id);
+          this.save = false;
+          this.favbutton();
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    },
+
+    removeFromFav() {
+      var delitepost = db.collection("Favoriteposts");
+      delitepost
+        .doc(this.delitingId)
+        .delete()
+        .then(() => {
+          console.log("Document successfully deleted!");
+          this.remove = false;
+          this.favbutton();
+          this.$root.$emit("Favorites");
+        })
+        .catch((error) => {
+          console.error("Error removing document: ", error);
+        });
     },
   },
 };
@@ -105,7 +185,7 @@ body {
   cursor: pointer;
 }
 
-.bi-star-fill:hover {
-  color: rgb(255, 251, 0);
+.bi-star:hover {
+  cursor: pointer;
 }
 </style>

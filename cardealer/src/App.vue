@@ -34,9 +34,6 @@
               <router-link to="/signup" class="nav-link">Sign Up</router-link>
             </li>
             <li v-if="store.currentUser" class="nav-item">
-              <router-link to="/search" class="nav-link">Search</router-link>
-            </li>
-            <li v-if="store.currentUser" class="nav-item">
               <router-link to="/sell car" class="nav-link"
                 >Sell car</router-link
               >
@@ -44,6 +41,11 @@
             <li v-if="store.currentUser" class="nav-item">
               <router-link to="/my listings" class="nav-link"
                 >My listings</router-link
+              >
+            </li>
+            <li v-if="store.currentUser" class="nav-item">
+              <router-link to="/favorites" class="nav-link"
+                >My favorites</router-link
               >
             </li>
             <li v-if="store.currentUser" class="nav-item">
@@ -59,22 +61,43 @@
 </template>
 <script>
 import store from "@/store";
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase";
 import router from "@/router";
 
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
   if (user) {
     // User is signed in.
-    console.log("****", user.email);
+    console.log("...", user.email);
+    var docRef = db.collection("profiles").doc(user.uid);
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          store.currentUser = doc.data();
+          console.log(store.currentUser + "!!!!");
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
     store.currentUser = user.email;
+    console.log(store.currentUser + "2222");
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
   } else {
-    console.log("no user");
+    console.log("No user!");
     store.currentUser = null;
-    if (router.name !== "Login") {
+    if (currentRoute.meta.needsUser) {
       router.push({ name: "Login" });
     }
   }
 });
+
 export default {
   name: "app",
   data() {

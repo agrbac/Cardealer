@@ -208,6 +208,7 @@ export default {
 
                 db.collection("listings")
                   .add({
+                    authorId: store.currentUser.id,
                     model1: model,
                     Manufacturer1: Manufacturer,
                     Fuel1: Fuel,

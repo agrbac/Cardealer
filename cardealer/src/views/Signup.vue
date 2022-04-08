@@ -65,9 +65,10 @@ email"
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import { firebase } from "@/firebase";
+import { db } from "@/firebase";
 export default {
   name: "signup",
   data() {
@@ -95,22 +96,28 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then((result) => {
-            console.log("uspjesna registracija");
-            this.$router.replace({ name: "Home" });
-            alert("uspjesna registracija");
-            return true;
+          .then((user) => {
+            db.collection("profiles")
+              .doc(user.user.uid)
+              .set({
+                username: this.username,
+                id: user.user.uid,
+              })
+              .then(function () {
+                console.log("Document successfully written!");
+              })
+              .catch(function (error) {
+                console.error("Error writing document: ", error);
+              });
+            alert("Uspješna registracija", user);
           })
           .catch(function (error) {
-            console.error("greska", error);
-            alert(error);
-            return;
+            console.log("Došlo je do greške", error);
+            console.log(error);
           });
+        console.log("Nastavak");
       }
     },
   },
 };
 </script>
-
-
-
